@@ -29,7 +29,7 @@ class Library:
 			self.legacymode = True
 			self.songs = []
 		self.getSongs()
-	
+
 	def getSongs(self):
 		format = "%Y-%m-%d %H:%M:%S"
 		for trackid,attributes in self.il['Tracks'].iteritems():
@@ -88,7 +88,7 @@ class Library:
 					self.songs.append(s)
 				else:
 					self.songs[int(trackid)] = s
-	
+
 	def getPlaylistNames(self,ignoreList=("Library","Music","Movies","TV Shows","Purchased","iTunes DJ","Podcasts")):
 		if (self.legacymode):
 			print "getPlaylistNames is disabled in legacy mode."
@@ -99,7 +99,7 @@ class Library:
 				if playlist['Name'] not in ignoreList:
 					playlists.append(playlist['Name'])
 			return playlists
-	
+
 	def getPlaylist(self,playlistName):
 		if (self.legacymode):
 			print "getPlaylist is disabled in legacy mode."
@@ -113,8 +113,9 @@ class Library:
 					#Make sure playlist was not empty
 					if 'Playlist Items' in playlist:
 						for track in playlist['Playlist Items']:
-							id=int(track['Track ID'])
+							id = int(track['Track ID'])
 							t = PlTrack()
+                                                        t.id = id
 							t.number = tracknum
 							t.name = self.songs[id].name
 							t.artist = self.songs[id].artist
@@ -142,4 +143,3 @@ class Library:
 		else:
 			print "xspf library missing, go to https://github.com/alastair/xspf to install."
 			return None
-

@@ -1,4 +1,5 @@
 class PlTrack:
+        id = None
 	location = None
 	name = None
 	artist = None
